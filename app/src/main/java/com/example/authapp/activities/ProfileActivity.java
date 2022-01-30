@@ -1,4 +1,4 @@
-package com.example.authapp;
+package com.example.authapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.authapp.R;
+import com.example.authapp.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
 
     private String userId;
-
+    private Button menu;
     private Button logout;
 
     @Override
@@ -38,6 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+            }
+        });
+
+        menu= (Button) findViewById(R.id.buttonMenu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this,HomeActivity.class));
             }
         });
 

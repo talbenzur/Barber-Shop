@@ -10,16 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AuthApp">
         <activity
-            android:name=".ForgotPassword"
+            android:name=".BookingActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".activities.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterUser"
+            android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

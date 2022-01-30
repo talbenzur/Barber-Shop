@@ -1,4 +1,4 @@
-package com.example.authapp;
+package com.example.authapp.Model;
 
 public class User {
     public String fullName,age,email;
