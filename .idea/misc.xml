@@ -7,13 +7,14 @@
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/drawable/ic_baseline_supervised_user_circle_24.xml" value="0.16302083333333334" />
-        <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_booking.xml" value="0.176" />
+        <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_booking.xml" value="0.264" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_calendar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_register_user.xml" value="0.264" />
+        <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/activity_show_booking.xml" value="0.146875" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/cards_layout.xml" value="0.4" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/cardslayout.xml" value="0.264" />
         <entry key="..\:/Users/vikvi/AndroidStudioProjects/AuthApp/app/src/main/res/layout/fragment_booking_step_four.xml" value="0.13020833333333334" />

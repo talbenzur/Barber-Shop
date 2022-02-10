@@ -1,4 +1,4 @@
-package com.example.authapp;
+package com.example.authapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.authapp.Adapter.AdapterItem;
+import com.example.authapp.R;
 import com.example.authapp.activities.dataUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,7 +39,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class BookingActivity extends AppCompatActivity {
+public class ShowBookingActivity extends AppCompatActivity {
     EditText input_minimal,
             input_maximal;
     Button btn_minimal,
@@ -48,7 +49,6 @@ public class BookingActivity extends AppCompatActivity {
     AdapterItem adapterItem;
     RecyclerView recyclerView;
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    FloatingActionButton fab_add;
     AlertDialog builderAlert;
     Context context;
     LayoutInflater layoutInflater;
@@ -66,7 +66,6 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
 
         context = this;
-        fab_add = findViewById(R.id.fab_add);
         cari = findViewById(R.id.cari);
         input_minimal = findViewById(R.id.input_minimal);
         input_maximal = findViewById(R.id.input_maximal);
@@ -139,12 +138,6 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        fab_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inputData();
-            }
-        });
 
         showData();
     }

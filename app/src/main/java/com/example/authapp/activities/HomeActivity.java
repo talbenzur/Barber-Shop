@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private CardView profile_card;
     private CardView booking_card;
+    private CardView showBooking_card;
 
     private ArrayList<DataModel> dataSet;
 
@@ -60,6 +61,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,BookingActivity.class));
+            }
+        });
+
+        showBooking_card = (CardView) findViewById(R.id.card_view_showbooking);
+        showBooking_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ShowBookingActivity.class));
             }
         });
 

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AuthApp">
         <activity
+            android:name=".activities.ShowBookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookingActivity"
             android:exported="false" />
         <activity

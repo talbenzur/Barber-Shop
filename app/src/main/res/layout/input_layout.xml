@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Gender" />
+        android:text="City" />
 
     <RadioGroup
         android:id="@+id/rb_group"
@@ -35,24 +35,24 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rb_male"
-            android:checked="true"
+            android:id="@+id/rb_Telaviv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:checked="true"
+            android:text="Tel-Aviv" />
 
         <RadioButton
-            android:id="@+id/rb_female"
+            android:id="@+id/rb_raanana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:text="Ra'anna" />
     </RadioGroup>
 
     <EditText
-        android:id="@+id/et_city"
+        android:id="@+id/et_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="City"
+        android:hint="Message to barber"
         android:inputType="textCapSentences" />
 
     <LinearLayout
