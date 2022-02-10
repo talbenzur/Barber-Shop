@@ -1,95 +1,261 @@
 package com.example.authapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import com.example.authapp.Adapter.MyViewPagerAdapter;
-import com.shuhart.stepview.StepView;
+import com.example.authapp.Adapter.AdapterItem;
+import com.example.authapp.activities.dataUser;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-//import butterknife.ButterKnife;
 
 public class BookingActivity extends AppCompatActivity {
-
-    StepView stepView;
-    ViewPager viewPager;
-    Button btn_previous_step;
-    Button btn_next_step;
-
+    EditText input_minimal,
+            input_maximal;
+    Button btn_minimal,
+            btn_maximal,
+            cari;
+    ArrayList<dataUser> list = new ArrayList<>();
+    AdapterItem adapterItem;
+    RecyclerView recyclerView;
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    FloatingActionButton fab_add;
+    AlertDialog builderAlert;
+    Context context;
+    LayoutInflater layoutInflater;
+    View showInput;
+    Calendar calendar = Calendar.getInstance();
+    Locale id = new Locale("in", "ID");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy", id);
+    Date date_minimal;
+    Date date_maximal;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        //ButterKnife.bind(BookingActivity.this);
-        setupStepView();
-        setColorButton();
+        context = this;
+        fab_add = findViewById(R.id.fab_add);
+        cari = findViewById(R.id.cari);
+        input_minimal = findViewById(R.id.input_minimal);
+        input_maximal = findViewById(R.id.input_maximal);
+        btn_minimal = findViewById(R.id.btn_minimal);
+        btn_maximal = findViewById(R.id.btn_maximal);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        //view
-
-        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        btn_minimal.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(year, month, dayOfMonth);
+                        input_minimal.setText(simpleDateFormat.format(calendar.getTime()));
+                        date_minimal = calendar.getTime();
 
+                        String input1 = input_minimal.getText().toString();
+                        String input2 = input_maximal.getText().toString();
+                        if (input1.isEmpty() && input2.isEmpty()){
+                            cari.setEnabled(false);
+                        }else {
+                            cari.setEnabled(true);
+                        }
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+        btn_maximal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(year, month, dayOfMonth);
+                        input_maximal.setText(simpleDateFormat.format(calendar.getTime()));
+                        date_maximal = calendar.getTime();
+
+                        String input1 = input_maximal.getText().toString();
+                        String input2 = input_minimal.getText().toString();
+                        if (input1.isEmpty() && input2.isEmpty()){
+                            cari.setEnabled(false);
+                        }else {
+                            cari.setEnabled(true);
+                        }
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+        cari.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query = database.child("user").orderByChild("tgl_pendaftaran").startAt(date_minimal.getTime()).endAt(date_maximal.getTime());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        showLisener(snapshot);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputData();
+            }
+        });
+
+        showData();
+    }
+
+    EditText et_nama, tgl_daftar,
+            et_jurusan;
+    Button btnDateDaftar,
+            simpanData;
+    RadioGroup rb_group;
+    RadioButton radioButton;
+    Date tgl_daftar_date;
+
+    private void inputData() {
+        builderAlert = new AlertDialog.Builder(context).create();
+        layoutInflater = getLayoutInflater();
+        showInput = layoutInflater.inflate(R.layout.input_layout, null);
+        builderAlert.setView(showInput);
+
+        et_nama = showInput.findViewById(R.id.et_name);
+        tgl_daftar = showInput.findViewById(R.id.tgl_date);
+        et_jurusan = showInput.findViewById(R.id.et_city);
+        btnDateDaftar = showInput.findViewById(R.id.btnDateDaftar);
+        simpanData = showInput.findViewById(R.id.booknow_btn);
+        rb_group = showInput.findViewById(R.id.rb_group);
+        builderAlert.show();
+
+        simpanData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nama = et_nama.getText().toString();
+                String jurusan = et_jurusan.getText().toString();
+                String tgl = tgl_daftar.getText().toString();
+                if (nama.isEmpty()) {
+                    et_nama.setError("Data tidak boleh kosong");
+                    et_nama.requestFocus();
+                } else if (jurusan.isEmpty()) {
+                    et_jurusan.setError("Data tidak boleh kosong");
+                    et_jurusan.requestFocus();
+                } else if (tgl.isEmpty()) {
+                    tgl_daftar.setError("Data tidak boleh kosong");
+                    tgl_daftar.requestFocus();
+                } else {
+                    int selected = rb_group.getCheckedRadioButtonId();
+                    radioButton = showInput.findViewById(selected);
+
+                    database.child("user").child(nama).setValue(new dataUser(
+                            nama,
+                            radioButton.getText().toString(),
+                            jurusan,
+                            tgl_daftar_date.getTime()
+                    )).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                            builderAlert.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            builderAlert.dismiss();
+                        }
+                    });
+
+                }
+            }
+        });
+
+        btnDateDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(year, month, dayOfMonth);
+                        tgl_daftar.setText(simpleDateFormat.format(calendar.getTime()));
+                        tgl_daftar_date = calendar.getTime();
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+
+        });
+
+    }
+
+    private void showData() {
+        database.child("user").addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                showLisener(snapshot);
             }
 
             @Override
-            public void onPageSelected(int i) {
-                if(i ==0)
-                    btn_previous_step.setEnabled(false);
-                else
-                    btn_previous_step.setEnabled(true);
-
-                setColorButton();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
     }
 
-
-
-
-    private void setColorButton(){
-            if ((btn_next_step.isEnabled())){
-                btn_next_step.setBackgroundResource((R.color.teal_200));
-            }
-
-            else {
-                btn_next_step.setBackgroundResource((android.R.color.holo_orange_light));
-            }
-
-        if ((btn_previous_step.isEnabled())){
-            btn_previous_step.setBackgroundResource((R.color.teal_200));
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void showLisener(DataSnapshot snapshot) {
+        list.clear();
+        for (DataSnapshot item : snapshot.getChildren()) {
+            dataUser user = item.getValue(dataUser.class);
+            list.add(user);
         }
-
-        else {
-            btn_previous_step.setBackgroundResource((android.R.color.holo_orange_light));
-        }
-
-        }
-
-
-    private void setupStepView(){
-        List<String>stepList = new ArrayList<>();
-        stepList.add("Salon");
-        stepList.add("Barber");
-        stepList.add("Time");
-        stepList.add("Confirm");
-        stepView.setSteps(stepList);
-
+        adapterItem = new AdapterItem(context, list);
+        recyclerView.setAdapter(adapterItem);
     }
 
 }

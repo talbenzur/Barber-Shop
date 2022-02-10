@@ -4,68 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/homeBackground"
     tools:context=".BookingActivity">
 
-    <com.shuhart.stepview.StepView
-        android:id="@+id/step_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:sv_animationType="None"
-        app:sv_doneCircleColor="@color/white"
-        app:sv_doneStepMarkColor="@color/white"
-        app:sv_doneTextColor="@color/black"
-        app:sv_selectedCircleColor="@color/white"
-        app:sv_selectedStepNumberColor="@color/white"
-        app:sv_stepPadding="12dp"
-        app:sv_typeface="@font/montserrat"/>
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/layout_button"
-        android:layout_below="@id/step_view"
-        android:layout_marginTop="-196dp"
-        android:layout_marginBottom="196dp" />
-
     <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout_button"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:padding="4dp"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/input_minimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:hint="Minimal" />
+
+                <Button
+                    android:id="@+id/btn_minimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/input_maximal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:hint="Maximal" />
+
+                <Button
+                    android:id="@+id/btn_maximal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn_previous_step"
-            android:text="Previous"
+            android:id="@+id/cari"
             android:enabled="false"
-            android:fontFamily="@font/montserrat"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-
-            />
-
-        <Button
-            android:id="@+id/btn_next_step"
-            android:text="Next"
-            android:enabled="false"
-            android:fontFamily="@font/montserrat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-
-            />
-
+            android:layout_gravity="end"
+            android:text="Cari" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_layout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@android:color/white" />
 
 </RelativeLayout>
