@@ -4,20 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/design_default_color_primary_dark"
-    tools:context=".BookingActivity">
+    android:background="@drawable/bgbooking"
+    tools:context=".activities.BookingActivity">
 
     <LinearLayout
-        android:id="@+id/header"
+        android:id="@+id/header1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#9939040C"
+            android:text="Please book an appointment"
+            android:textAlignment="center"
+            android:textColor="#300039"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,7 +45,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/input_minimal"
+                    android:id="@+id/input_minimal1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -34,7 +53,7 @@
                     android:hint="Minimal" />
 
                 <Button
-                    android:id="@+id/btn_minimal"
+                    android:id="@+id/btn_minimal1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
@@ -48,7 +67,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/input_maximal"
+                    android:id="@+id/input_maximal1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -56,7 +75,7 @@
                     android:hint="Maximal" />
 
                 <Button
-                    android:id="@+id/btn_maximal"
+                    android:id="@+id/btn_maximal1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
@@ -65,25 +84,27 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/cari"
-            android:enabled="false"
+            android:id="@+id/cari1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:backgroundTint="@color/purple_200"
-            android:text="Search" />
+            android:enabled="false"
+            android:text="Search"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/header1"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
+        android:id="@+id/fab_add1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -92,8 +113,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="@color/purple_200"
-        android:tint="@android:color/white" />
+        android:backgroundTint="#39040C"
+        android:src="@android:drawable/ic_input_add" />
 
 </RelativeLayout>

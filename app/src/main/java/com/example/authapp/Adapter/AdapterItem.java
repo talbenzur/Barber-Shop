@@ -51,7 +51,8 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
         TextView tv_nama,
                 tv_jk,
                 tv_jurusan,
-                tv_tanggal_pendaftaran;
+                tv_tanggal_pendaftaran,
+                tv_hour;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +60,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
             tv_jk = itemView.findViewById(R.id.tv_city_name);
             tv_jurusan = itemView.findViewById(R.id.tv_message);
             tv_tanggal_pendaftaran = itemView.findViewById(R.id.tv_date);
+            tv_hour = itemView.findViewById(R.id.tv_hour);
         }
 
         public void viewBind(dataUser dataUser) {
@@ -66,6 +68,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
             tv_jk.setText(dataUser.getCity());
             tv_jurusan.setText(dataUser.getMessage());
             tv_tanggal_pendaftaran.setText(simpleDateFormat.format(dataUser.getDate()));
+            tv_hour.setText(dataUser.getHour());
         }
     }
 }

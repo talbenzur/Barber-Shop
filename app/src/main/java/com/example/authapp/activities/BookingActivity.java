@@ -1,4 +1,4 @@
-package com.example.authapp;
+package com.example.authapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.authapp.Adapter.AdapterItem;
+import com.example.authapp.R;
 import com.example.authapp.activities.dataUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -66,13 +67,13 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
 
         context = this;
-        fab_add = findViewById(R.id.fab_add);
-        cari = findViewById(R.id.cari);
-        input_minimal = findViewById(R.id.input_minimal);
-        input_maximal = findViewById(R.id.input_maximal);
-        btn_minimal = findViewById(R.id.btn_minimal);
-        btn_maximal = findViewById(R.id.btn_maximal);
-        recyclerView = findViewById(R.id.recyclerView);
+        fab_add = findViewById(R.id.fab_add1);
+        cari = findViewById(R.id.cari1);
+        input_minimal = findViewById(R.id.input_minimal1);
+        input_maximal = findViewById(R.id.input_maximal1);
+        btn_minimal = findViewById(R.id.btn_minimal1);
+        btn_maximal = findViewById(R.id.btn_maximal1);
+        recyclerView = findViewById(R.id.recyclerView1);
 
         btn_minimal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +124,7 @@ public class BookingActivity extends AppCompatActivity {
         cari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query query = database.child("booking").orderByChild("tgl_pendaftaran").startAt(date_minimal.getTime()).endAt(date_maximal.getTime());
+                Query query = database.child("booking").orderByChild("date").startAt(date_minimal.getTime()).endAt(date_maximal.getTime());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -153,8 +154,8 @@ public class BookingActivity extends AppCompatActivity {
             et_jurusan;
     Button btnDateDaftar,
             simpanData;
-    RadioGroup rb_group;
-    RadioButton radioButton;
+    RadioGroup rb_group,rb_group2;
+    RadioButton radioButton,radioButton2;
     Date tgl_daftar_date;
 
     private void inputData() {
@@ -169,6 +170,7 @@ public class BookingActivity extends AppCompatActivity {
         btnDateDaftar = showInput.findViewById(R.id.btnDateDaftar);
         simpanData = showInput.findViewById(R.id.booknow_btn);
         rb_group = showInput.findViewById(R.id.rb_group);
+        rb_group2 = showInput.findViewById(R.id.rb_group2);
         builderAlert.show();
 
         simpanData.setOnClickListener(new View.OnClickListener() {
@@ -178,27 +180,32 @@ public class BookingActivity extends AppCompatActivity {
                 String jurusan = et_jurusan.getText().toString();
                 String tgl = tgl_daftar.getText().toString();
                 if (nama.isEmpty()) {
-                    et_nama.setError("Data tidak boleh kosong");
+                    et_nama.setError("Error");
                     et_nama.requestFocus();
                 } else if (jurusan.isEmpty()) {
-                    et_jurusan.setError("Data tidak boleh kosong");
+                    et_jurusan.setError("Error");
                     et_jurusan.requestFocus();
                 } else if (tgl.isEmpty()) {
-                    tgl_daftar.setError("Data tidak boleh kosong");
+                    tgl_daftar.setError("Error");
                     tgl_daftar.requestFocus();
                 } else {
                     int selected = rb_group.getCheckedRadioButtonId();
                     radioButton = showInput.findViewById(selected);
 
+                    int selected2 = rb_group2.getCheckedRadioButtonId();
+                    radioButton2 = showInput.findViewById(selected2);
+
+
                     database.child("booking").child(nama).setValue(new dataUser(
                             nama,
                             radioButton.getText().toString(),
                             jurusan,
-                            tgl_daftar_date.getTime()
+                            tgl_daftar_date.getTime(),
+                            radioButton2.getText().toString()
                     )).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Booking was made successfully", Toast.LENGTH_SHORT).show();
                             builderAlert.dismiss();
                         }
                     }).addOnFailureListener(new OnFailureListener() {

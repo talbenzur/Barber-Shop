@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/design_default_color_primary_dark"
-    tools:context=".BookingActivity">
+    android:background="@drawable/bgbooking"
+    tools:context=".activities.ShowBookingActivity">
 
     <LinearLayout
         android:id="@+id/header"
@@ -37,7 +37,8 @@
                     android:id="@+id/btn_minimal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/purple_200"
+                    android:backgroundTint="#ED4C0F19"
+                    android:textColor="@color/white"
                     android:text="Date" />
             </LinearLayout>
 
@@ -59,7 +60,8 @@
                     android:id="@+id/btn_maximal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/purple_200"
+                    android:backgroundTint="#D239040C"
+                    android:textColor="@color/white"
                     android:text="Date" />
             </LinearLayout>
         </LinearLayout>
@@ -70,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="#D239040C"
+            android:textColor="@color/white"
             android:text="Search" />
     </LinearLayout>
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ProfileActivity"
-    android:background="@drawable/background"
+    android:background="@drawable/bglogin"
+
     >
 
 
@@ -108,8 +109,9 @@
         android:id="@+id/signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_200"
+        android:backgroundTint="#9939040C"
         android:text="Logout"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +126,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Back to menu"
-        android:backgroundTint="@color/purple_200"
+        android:backgroundTint="#9939040C"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

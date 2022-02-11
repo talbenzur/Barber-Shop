@@ -13,7 +13,7 @@
             android:name=".activities.ShowBookingActivity"
             android:exported="false" />
         <activity
-            android:name=".BookingActivity"
+            android:name=".activities.BookingActivity"
             android:exported="false" />
         <activity
             android:name=".activities.CalendarActivity"

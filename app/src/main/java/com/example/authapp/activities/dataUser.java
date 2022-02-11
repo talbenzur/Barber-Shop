@@ -7,15 +7,17 @@ public class dataUser {
     private String city;
     private String message;
     private long date;
+    private String hour;
 
     public dataUser() {
     }
 
-    public dataUser(String name, String city, String message, long date) {
+    public dataUser(String name, String city, String message, long date, String hour) {
         this.name = name;
         this.city = city;
         this.message = message;
         this.date = date;
+        this.hour = hour;
     }
 
     public String getId() {
@@ -36,5 +38,9 @@ public class dataUser {
 
     public long getDate() {
         return date;
+    }
+
+    public String getHour() {
+        return hour;
     }
 }

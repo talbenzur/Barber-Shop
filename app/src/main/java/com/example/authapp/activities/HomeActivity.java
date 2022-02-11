@@ -12,13 +12,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.authapp.Adapter.CustomAdapter;
-import com.example.authapp.BookingActivity;
 import com.example.authapp.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
